@@ -31,7 +31,7 @@
             <div>
                 <div class="flex items-center gap-2 mb-1">
                     <span class="bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Production</span>
-                    <a href="stayora.com.pk" target="_blank" class="group">
+                    <a href="https://stayora.com.pk" target="_blank" class="group">
                         <h1 class="text-xl font-bold text-gray-600 group-hover:text-indigo-600 transition-colors">
                             stayora<span class="text-indigo-600 group-hover:text-indigo-800">.com.pk</span>
                             <svg class="inline-block w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -147,11 +147,17 @@
                     </div>
                 </div>
                 
-                <!-- Action Button -->
-                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
-                    <button id="executeDeployBtn" class="w-full md:w-auto bg-gray-900 text-white px-10 py-3 rounded-lg font-bold hover:bg-black transition-all shadow-xl hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center">
+                <!-- Action Buttons -->
+                <div class="mt-8 pt-6 border-t border-gray-100 flex flex-col md:flex-row gap-4 justify-end">
+                    <!-- Standard Deploy -->
+                    <button id="executeDeployBtn" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-black transition-all shadow-xl flex items-center justify-center">
                         <svg id="deployIcon" class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
-                        Pull & Deploy
+                        Standard Pull & Deploy
+                    </button>
+                    <!-- Force Deploy -->
+                    <button id="forceDeployBtn" class="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition-all shadow-xl flex items-center justify-center group">
+                        <svg id="forceIcon" class="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        Force Reset & Pull
                     </button>
                 </div>
             </div>
@@ -160,7 +166,7 @@
         <!-- Footer -->
         <footer class="mt-12 pt-8 border-t border-gray-200 text-center">
             <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">
-                Last updated: 2026-04-23 | Bahalim Group Web Ops | <a href="deploy.php" class="underline hover:text-indigo-500 transition-colors">deploy.php</a>
+                Last updated: 2026-04-29 | Bahalim Group Web Ops | <a href="deploy.php" class="underline hover:text-indigo-500 transition-colors">deploy.php</a>
             </p>
         </footer>
     </div>
@@ -180,6 +186,7 @@
         const errorMessage = document.getElementById('errorMessage');
         const deployStatusResult = document.getElementById('deployStatusResult');
         const executeDeployBtn = document.getElementById('executeDeployBtn');
+        const forceDeployBtn = document.getElementById('forceDeployBtn');
 
         window.addEventListener('DOMContentLoaded', () => {
             fetchGitHubCommits();
@@ -217,7 +224,6 @@
                 updateCommitDropdown(commits);
                 errorAlert.classList.add('hidden');
 
-                // If user clicked Sync, automatically display the latest commit and its status
                 if (isManual && commits.length > 0) {
                     commitSelect.value = commits[0].sha;
                     displayCommitDetails(commits[0]);
@@ -279,7 +285,7 @@
         commitSelect.addEventListener('change', (e) => {
             const commit = currentCommits.find(c => c.sha === e.target.value);
             if (commit) {
-                deployStatusResult.innerHTML = '<span class="text-blue-400">> Selected older commit. Waiting for action.</span>';
+                deployStatusResult.innerHTML = '<span class="text-blue-400">> Selected commit. Waiting for action.</span>';
                 displayCommitDetails(commit);
             }
         });
@@ -291,22 +297,36 @@
             fetchGitHubCommits(true);
         });
 
-        // Pull & Deploy Simulation (Updates the Deploy Status Result box)
-        executeDeployBtn.addEventListener('click', () => {
+        // Pull & Deploy Logic
+        function performDeploy(isForce = false) {
             if (currentCommits.length === 0) return;
             
-            const btnIcon = document.getElementById('deployIcon');
-            executeDeployBtn.disabled = true;
-            btnIcon.classList.add('animate-spin');
+            const btn = isForce ? forceDeployBtn : executeDeployBtn;
+            const icon = isForce ? document.getElementById('forceIcon') : document.getElementById('deployIcon');
             
-            deployStatusResult.innerHTML = '<span class="text-amber-400">> Executing Deploy Script...<br>> Pulling files to /home/arikgrlc/stayora.com.pk</span>';
+            btn.disabled = true;
+            icon.classList.add('animate-spin');
             
-            // Mock API delay for deployment UI feel
+            if (isForce) {
+                deployStatusResult.innerHTML = '<span class="text-red-400">> ⚠️ FORCE MODE ENABLED...<br>> Discarding server changes & resetting to GitHub...</span>';
+            } else {
+                deployStatusResult.innerHTML = '<span class="text-amber-400">> Standard Git Pull in progress...</span>';
+            }
+            
+            // Simulation of PHP backend execution
             setTimeout(() => {
-                deployStatusResult.innerHTML = `<span class="text-green-400">> ✅ Success! Deployed Commit ID: ${commitSelect.value.substring(0,7)} at ${new Date().toLocaleTimeString()}<br>> Website is now LIVE on stayora</span>`;
-                btnIcon.classList.remove('animate-spin');
-                executeDeployBtn.disabled = false;
-            }, 2000);
+                deployStatusResult.innerHTML = `<span class="text-green-400">> ✅ ${isForce ? 'FORCE RESET' : 'PULL'} SUCCESSFUL!<br>> Deployed Commit: #${commitSelect.value.substring(0,7)}<br>> Time: ${new Date().toLocaleTimeString()}</span>`;
+                icon.classList.remove('animate-spin');
+                btn.disabled = false;
+            }, 2500);
+        }
+
+        executeDeployBtn.addEventListener('click', () => performDeploy(false));
+        forceDeployBtn.addEventListener('click', () => {
+            const confirmMsg = "Warning: This will delete any local unsaved changes on the server and force files to match GitHub exactly. Continue?";
+            if(confirm(confirmMsg)) {
+                performDeploy(true);
+            }
         });
 
         document.getElementById('deployNewBtn').addEventListener('click', () => {

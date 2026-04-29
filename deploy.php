@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deployment Manager G247| stayora.com.pk</title>
+    <title>Deployment Manager SO| stayora.com.pk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -299,11 +299,11 @@
             executeDeployBtn.disabled = true;
             btnIcon.classList.add('animate-spin');
             
-            deployStatusResult.innerHTML = '<span class="text-amber-400">> Executing Deploy Script...<br>> Pulling files to /home/noorgeec/noorgee.pk/stayora/</span>';
+            deployStatusResult.innerHTML = '<span class="text-amber-400">> Executing Deploy Script...<br>> Pulling files to /home/arikgrlc/stayora.com.pk</span>';
             
             // Mock API delay for deployment UI feel
             setTimeout(() => {
-                deployStatusResult.innerHTML = `<span class="text-green-400">> ✅ Success! Deployed Commit ID: ${commitSelect.value.substring(0,7)} at ${new Date().toLocaleTimeString()}<br>> Website is now LIVE on noorgee.pk/stayora</span>`;
+                deployStatusResult.innerHTML = `<span class="text-green-400">> ✅ Success! Deployed Commit ID: ${commitSelect.value.substring(0,7)} at ${new Date().toLocaleTimeString()}<br>> Website is now LIVE on stayora</span>`;
                 btnIcon.classList.remove('animate-spin');
                 executeDeployBtn.disabled = false;
             }, 2000);

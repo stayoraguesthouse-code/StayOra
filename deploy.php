@@ -31,9 +31,9 @@
             <div>
                 <div class="flex items-center gap-2 mb-1">
                     <span class="bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Production</span>
-                    <a href="https://noorgee.pk/stayora" target="_blank" class="group">
+                    <a href="stayora.com.pk" target="_blank" class="group">
                         <h1 class="text-xl font-bold text-gray-600 group-hover:text-indigo-600 transition-colors">
-                            noorgee.pk/<span class="text-indigo-600 group-hover:text-indigo-800">stayora</span>
+                            stayora<span class="text-indigo-600 group-hover:text-indigo-800">.com.pk</span>
                             <svg class="inline-block w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </h1>
                     </a>

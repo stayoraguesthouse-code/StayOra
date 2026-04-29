@@ -1,1 +1,353 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayOra - Luxury Guest House in Karachi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fafaf9; /* stone-50 */
+        }
+        
+        h1, h2, h3, h4, h5, .font-serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Dynamic Parallax Hero */
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.5)), url('http://noorgee.pk/img/SO-room-1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Interactive Card Hover Effects */
+        .elegant-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .elegant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #d97706; /* amber-600 */
+        }
+
+        /* Custom Scrollbar for a premium feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #064e3b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex items-center space-x-3">
+                    <img src="http://noorgee.pk/stayora/img/stay-edited.png" alt="StayOra Logo" class="h-12 w-auto object-contain rounded shadow-sm">
+                    <span class="text-2xl font-serif font-bold text-emerald-900 tracking-wide hidden sm:block">StayOra</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#home" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Home</a></li>
+                    <li><a href="#amenities" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Amenities</a></li>
+                    <li><a href="#rooms" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Rooms</a></li>
+                    <li><a href="#policies" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Policies</a></li>
+                    <li>
+                        <a href="https://wa.me/923282255771" target="_blank" class="bg-emerald-900 text-amber-500 hover:bg-emerald-800 hover:text-amber-400 px-6 py-2.5 rounded-none border border-emerald-900 transition duration-300 font-medium tracking-wide flex items-center">
+                            <i class="fab fa-whatsapp mr-2"></i> Book Now
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-emerald-900 hover:text-amber-600 transition">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 pb-4 absolute w-full left-0 shadow-lg">
+                <a href="#home" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Home</a>
+                <a href="#amenities" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Amenities</a>
+                <a href="#rooms" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Rooms</a>
+                <a href="#policies" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Policies</a>
+                <a href="https://wa.me/923282255771" class="block py-3 px-4 font-bold text-emerald-900 hover:bg-stone-50 transition">Contact via WhatsApp</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Interactive Hero Section -->
+    <section id="home" class="hero-section min-h-[90vh] flex items-center justify-center relative pt-20">
+        <!-- Decorative border element -->
+        <div class="absolute inset-4 border border-white/20 pointer-events-none hidden md:block"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 mt-10">
+            <span class="text-amber-500 font-medium tracking-[0.2em] uppercase text-sm mb-4 block animate-fade-in-up">Welcome to your sanctuary</span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Luxury Stay in the <br/><span class="text-amber-500 italic">Heart of Karachi</span>
+            </h1>
+            <p class="text-lg md:text-xl text-stone-200 mb-10 max-w-2xl mx-auto font-light tracking-wide">
+                Discover the perfect blend of comfort, elegance, and convenience at StayOra — where every stay is crafted to feel like a premium home.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="https://wa.me/923282255771" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-emerald-900 bg-amber-500 overflow-hidden transition-all duration-300 hover:bg-amber-400 shadow-xl hover:shadow-amber-500/30 w-full sm:w-auto min-w-[200px]">
+                    <span class="mr-2"><i class="fab fa-whatsapp text-lg"></i></span>
+                    <span>Reserve Your Stay</span>
+                </a>
+                <a href="#rooms" class="group inline-flex items-center justify-center px-8 py-4 font-medium text-white border border-white/50 hover:bg-white/10 transition-all duration-300 w-full sm:w-auto min-w-[200px] backdrop-blur-sm">
+                    <span>View Our Suites</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#amenities" class="text-white/70 hover:text-amber-500 transition">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Premium Amenities Section -->
+    <section id="amenities" class="py-24 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-emerald-700 font-medium tracking-widest uppercase text-xs">Experience Perfection</span>
+                <h2 class="text-4xl font-serif font-bold text-slate-900 mt-2 mb-4">Our Premium Amenities</h2>
+                <div class="h-1 w-24 bg-amber-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Amenity Item -->
+                <div class="elegant-card group bg-white p-8 border border-stone-100 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-stone-50 flex items-center justify-center mb-6 group-hover:bg-emerald-900 transition-colors duration-300">
+                        <i class="fas fa-wifi text-2xl text-emerald-700 group-hover:text-amber-500 transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">High-Speed WiFi</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Uninterrupted, lightning-fast connectivity across the entire property.</p>
+                </div>
+
+                <div class="elegant-card group bg-white p-8 border border-stone-100 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-stone-50 flex items-center justify-center mb-6 group-hover:bg-emerald-900 transition-colors duration-300">
+                        <i class="fas fa-shield-halved text-2xl text-emerald-700 group-hover:text-amber-500 transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">Secure Parking</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Dedicated, monitored indoor parking ensuring your vehicle's safety.</p>
+                </div>
+
+                <div class="elegant-card group bg-white p-8 border border-stone-100 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-stone-50 flex items-center justify-center mb-6 group-hover:bg-emerald-900 transition-colors duration-300">
+                        <i class="fas fa-tv text-2xl text-emerald-700 group-hover:text-amber-500 transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">Smart Entertainment</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">40" Smart TVs with premium streaming and mini-fridges in all rooms.</p>
+                </div>
+
+                <div class="elegant-card group bg-white p-8 border border-stone-100 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-stone-50 flex items-center justify-center mb-6 group-hover:bg-emerald-900 transition-colors duration-300">
+                        <i class="fas fa-concierge-bell text-2xl text-emerald-700 group-hover:text-amber-500 transition-colors duration-300"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-slate-900 mb-3">24/7 Room Service</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Dedicated staff ready to cater to your needs at any hour of the day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Elegant Rooms Section -->
+    <section id="rooms" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-emerald-700 font-medium tracking-widest uppercase text-xs">Accommodation</span>
+                    <h2 class="text-4xl font-serif font-bold text-slate-900 mt-2">Rooms & Suites</h2>
+                </div>
+                <div class="mt-4 md:mt-0 text-slate-500 max-w-md md:text-right text-sm">
+                    Designed with luxury and tranquility in mind. Every room offers a perfect retreat after a busy day in the city.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Premium Room -->
+                <div class="group bg-stone-50 border border-stone-200 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col">
+                    <div class="p-8 md:p-10 flex-grow relative">
+                        <div class="absolute top-0 right-0 bg-emerald-900 text-amber-500 text-xs font-bold px-4 py-1 tracking-wider uppercase">Most Popular</div>
+                        
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-2 group-hover:text-emerald-800 transition-colors">Premium Suite</h3>
+                        <p class="text-amber-600 font-medium tracking-wide text-sm mb-6 uppercase">Double Bed</p>
+                        
+                        <div class="flex items-baseline mb-8">
+                            <span class="text-4xl font-bold text-slate-900">PKR 8,000</span>
+                            <span class="text-slate-500 ml-2">/ Night</span>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-8 text-slate-600">
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Spacious king/double bed arrangement</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Beautiful garden view & seating</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>En-suite luxury private bathroom</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Complimentary hot breakfast included</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/923282255771" target="_blank" class="bg-slate-900 group-hover:bg-emerald-900 text-white text-center py-4 font-medium uppercase tracking-widest text-sm transition-colors duration-300">
+                        Reserve This Suite
+                    </a>
+                </div>
+
+                <!-- Standard Room -->
+                <div class="group bg-stone-50 border border-stone-200 overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col">
+                    <div class="p-8 md:p-10 flex-grow">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-2 group-hover:text-emerald-800 transition-colors">Executive Single</h3>
+                        <p class="text-emerald-600 font-medium tracking-wide text-sm mb-6 uppercase">Per Person</p>
+                        
+                        <div class="flex items-baseline mb-8">
+                            <span class="text-4xl font-bold text-slate-900">PKR 6,000</span>
+                            <span class="text-slate-500 ml-2">/ Night</span>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-8 text-slate-600">
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Comfortable luxury single bed</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Cozy, climate-controlled space</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Smart TV & High-speed WiFi</span></li>
+                            <li class="flex items-start"><i class="fas fa-check text-emerald-600 mt-1 mr-3"></i> <span>Complimentary hot breakfast included</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/923282255771" target="_blank" class="bg-slate-900 group-hover:bg-emerald-900 text-white text-center py-4 font-medium uppercase tracking-widest text-sm transition-colors duration-300">
+                        Reserve This Room
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies & House Rules -->
+    <section id="policies" class="py-24 bg-emerald-900 text-stone-100 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-white mb-4">Guest Policies & Etiquette</h2>
+                <p class="text-emerald-200 max-w-2xl mx-auto">To ensure a peaceful and premium environment for all our guests, we adhere to strict house policies.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Policy 1 -->
+                <div class="bg-emerald-800/50 backdrop-blur-sm p-8 border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <i class="fas fa-clock text-amber-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Check-In / Out</h3>
+                    <p class="text-emerald-100/80 text-sm leading-relaxed">Standard timing is <strong>12:00 PM</strong> for both check-in and check-out. We operate 24 hours to accommodate special travel schedules.</p>
+                </div>
+
+                <!-- Policy 2 -->
+                <div class="bg-emerald-800/50 backdrop-blur-sm p-8 border border-amber-500/30 hover:border-amber-500/80 transition-colors relative">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-emerald-900 text-xs font-bold px-3 py-1 uppercase">Strictly Enforced</div>
+                    <i class="fas fa-users text-amber-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Family & Couples</h3>
+                    <p class="text-emerald-100/80 text-sm leading-relaxed">We are a family-friendly establishment. <strong>Unmarried couples are strictly prohibited.</strong> Valid CNIC or proof of marriage is required at check-in.</p>
+                </div>
+
+                <!-- Policy 3 -->
+                <div class="bg-emerald-800/50 backdrop-blur-sm p-8 border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <i class="fas fa-credit-card text-amber-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-serif font-bold text-white mb-3">Payments</h3>
+                    <p class="text-emerald-100/80 text-sm leading-relaxed">Full payment is required upon check-in to confirm your stay. We accept cash and major bank transfers on site.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact -->
+    <footer class="bg-slate-900 text-stone-300 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <!-- Brand Info -->
+                <div class="md:col-span-4">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="http://noorgee.pk/stayora/img/stay-edited.png" alt="StayOra Logo" class="h-10 w-auto object-contain rounded opacity-90">
+                        <span class="text-2xl font-serif font-bold text-white tracking-wide">StayOra</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-slate-400 mb-6">
+                        A <b>BAHALIM GROUP</b> property. Redefining luxury stays in Karachi with unmatched Comfort, Security, and Elegance.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/stayoraguesthouse/" target="_blank" class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center hover:bg-amber-500 hover:text-slate-900 transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/stayoraguesthouse/" target="_blank" class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center hover:bg-amber-500 hover:text-slate-900 transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/923282255771" target="_blank" class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="md:col-span-4 md:col-start-6">
+                    <h4 class="text-white font-serif font-bold text-lg mb-6">Contact Us</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-amber-500"></i>
+                            <span>House # 82-B, Street 6, <br>SMCHS, Karachi</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-amber-500"></i>
+                            <a href="tel:03218255188" class="hover:text-amber-500 transition">0321 82 55 188</a> 
+                            <span class="mx-2">|</span> 
+                            <a href="tel:+923282255771" class="hover:text-amber-500 transition">+92 328 22 55 771</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-amber-500"></i>
+                            <a href="mailto:stayoraguesthouse@gmail.com" class="hover:text-amber-500 transition">stayoraguesthouse@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Map snippet -->
+                <div class="md:col-span-3">
+                    <div class="w-full h-40 bg-slate-800 rounded border border-slate-700 overflow-hidden relative group">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3616.2954285369633!2d67.03891471533797!3d24.82119729411711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sStayOra%20Guest%20House!2sBlock%20B%2C%20SMCHS%2C%20Karachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="opacity-80 group-hover:opacity-100 transition-opacity"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 StayOra Guest House. All rights reserved. (update,29-Apr-2026,12:27pm)</p>
+                <p class="mt-2 md:mt-0 uppercase tracking-widest">Built for Comfort • SMCHS, Karachi</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Sticky Navbar Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('py-0');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-0');
+            }
+        });
+    </script>
+</body>
+</html>

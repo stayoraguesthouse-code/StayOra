@@ -138,7 +138,7 @@
 
         <footer class="mt-12 pt-8 border-t border-gray-200 text-center">
             <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">
-                Last updated: 2026-04-29 | Bahalim Group Web Ops
+                Last updated: 2026-05-05 | Bahalim Group Web Ops
             </p>
         </footer>
     </div>

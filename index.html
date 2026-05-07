@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Accommodation<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -41,6 +41,32 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #064e3b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+    
+    .gallery-btn-wrap {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.gallery-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #111827;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.gallery-btn:hover {
+    background: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
     </style>
 </head>
 <body class="text-slate-800 antialiased">
@@ -159,6 +185,10 @@
                     <p class="text-slate-500 text-sm leading-relaxed">Dedicated staff ready to cater to your needs at any hour of the day.</p>
                 </div>
             </div>
+            <div class="gallery-btn-wrap">
+    <a href="gallery.html" class="gallery-btn">View Gallery</a>
+</div>
+            
         </div>
     </section>
 

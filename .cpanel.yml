@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export REPOPATH=/home/arikgrlc/repositories/StayOra
-    - export DEPLOYPATH=/home/arikgrlc/stayora.com.pk
-    - /bin/cp -a $REPOPATH/. $DEPLOYPATH/
+    - export DEPLOYPATH=/home/arikgrlc/stayora.com.pk/
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R .htaccess $DEPLOYPATH

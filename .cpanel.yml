@@ -2,5 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/arikgrlc/stayora.com.pk/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R index.html $DEPLOYPATH
+    - /bin/cp -R gallery.html $DEPLOYPATH
+    - /bin/cp -R img $DEPLOYPATH
     - /bin/cp -R .htaccess $DEPLOYPATH

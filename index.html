@@ -378,5 +378,13 @@ Accommodation<!DOCTYPE html>
             }
         });
     </script>
+<!-- Claude Chat Widget -->
+<div id="claude-btn" onclick="toggleChat()">💬 Chat</div>
+<div id="claude-box" style="display:none">
+  <div id="claude-msgs"></div>
+  <input id="claude-input" placeholder="سوال لکھیں..."/>
+  <button onclick="sendMsg()">بھیجیں</button>
+</div>
+<script src="chat-widget.js"></script>
 </body>
 </html>

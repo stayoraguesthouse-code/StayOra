@@ -1,1 +1,60 @@
+#stayora-chat-btn {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #1a5276; color: #fff;
+  padding: 14px 22px; border-radius: 50px;
+  cursor: pointer; font-size: 15px; font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999; border: none;
+}
 
+#stayora-chat-box {
+  position: fixed; bottom: 90px; right: 24px;
+  width: 340px; height: 460px;
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  display: none; flex-direction: column;
+  z-index: 9998; overflow: hidden;
+}
+
+.stay-header {
+  background: #1a5276; color: #fff;
+  padding: 14px 18px; font-size: 15px; font-weight: bold;
+}
+
+#stay-msgs {
+  flex: 1; overflow-y: auto;
+  padding: 14px; display: flex;
+  flex-direction: column; gap: 10px;
+}
+
+.stay-msg {
+  padding: 10px 14px; border-radius: 12px;
+  max-width: 85%; font-size: 14px; line-height: 1.5;
+}
+
+.stay-msg.user {
+  background: #1a5276; color: #fff;
+  align-self: flex-end; border-radius: 12px 12px 0 12px;
+}
+
+.stay-msg.bot {
+  background: #f0f4f8; color: #333;
+  align-self: flex-start; border-radius: 12px 12px 12px 0;
+}
+
+.stay-input-area {
+  display: flex; padding: 10px;
+  border-top: 1px solid #eee; gap: 8px;
+}
+
+.stay-input-area input {
+  flex: 1; padding: 10px 14px;
+  border: 1px solid #ddd; border-radius: 25px;
+  font-size: 13px; outline: none;
+}
+
+.stay-input-area button {
+  background: #1a5276; color: #fff;
+  border: none; border-radius: 25px;
+  padding: 10px 16px; cursor: pointer; font-size: 13px;
+}

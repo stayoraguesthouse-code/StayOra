@@ -1,8 +1,17 @@
 ---
 deployment:
   tasks:
+    # 1. لائیو ڈائریکٹری کا پاتھ سیٹ کریں
     - export DEPLOYPATH=/home/noorgeec/noorgee.pk/stayora/
+    
+    # 2. پرانی فائلز کو لائیو ڈائریکٹری میں کاپی کریں
     - /bin/cp -R index.html $DEPLOYPATH
     - /bin/cp -R gallery.html $DEPLOYPATH
     - /bin/cp -R img $DEPLOYPATH
     - /bin/cp -R .htaccess $DEPLOYPATH
+    
+    # 3. نئی چٹ بوٹ اور نالج بیس فائلز کو لائیو ڈائریکٹری میں کاپی کریں
+    - /bin/cp -R claude-chat.php $DEPLOYPATH
+    - /bin/cp -R chat-widget.js $DEPLOYPATH
+    - /bin/cp -R chat-style.css $DEPLOYPATH
+    - /bin/cp -R stayora-kb.md $DEPLOYPATH

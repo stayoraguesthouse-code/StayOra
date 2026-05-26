@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/arikgrlc/stayora.com.pk/
+    - export DEPLOYPATH=/home/noorgeec/noorgee.pk/stayora/
     - /bin/cp -R index.html $DEPLOYPATH
     - /bin/cp -R gallery.html $DEPLOYPATH
     - /bin/cp -R img $DEPLOYPATH

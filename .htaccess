@@ -1,0 +1,5 @@
+# Block access to ALL hidden files and directories (starting with a dot)
+# Except for well-known directories like .well-known for SSL certificates
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
+RewriteRule (^\.|/\.) - [F,L]

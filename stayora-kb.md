@@ -10,7 +10,7 @@ Airport Proximity: Strategically located in the heart of Karachi, just a 15-minu
 
 Google Maps Link: https://maps.app.goo.gl/VJ4jwYTAAvNUM27T9
 
-Phone Numbers (رابطہ نمبر): 0321 8255188 | +92-328-2255771
+Phone Numbers : 0321 8255188 | 092-328-2255771
 
 WhatsApp Quick Chat: https://wa.me/923282255771
 

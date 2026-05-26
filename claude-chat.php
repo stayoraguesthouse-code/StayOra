@@ -1,4 +1,8 @@
 <?php
+// ✅ کلاؤڈ اور ہوسٹنگ پرفارمنس کے لیے ایرر رپورٹنگ کنٹرول کریں
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // ڈائریکٹ ایررز بند کریں تاکہ JSON فارمیٹ خراب نہ ہو
+
 // ✅ CORS Headers — سب سے اوپر رکھیں تاکہ کوئی بھی ایرر آنے پر بلاک نہ ہو
 header('Access-Control-Allow-Origin: https://noorgee.pk');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
@@ -11,11 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // ✅ فرنٹ اینڈ فرینڈلی ایرر ہینڈلر فنکشن
-// یہ فنکشن کسی بھی خرابی کی صورت میں ایرر میسیج کو کلاڈ (Claude) کے فارمیٹ میں بھیجے گا
-// تاکہ فرنٹ اینڈ وزٹ پر "معذرت، کوئی مسئلہ ہوا" کے بجائے اصل تکنیکی خرابی نظر آئے۔
 function send_error($msg) {
     echo json_encode([
-        'error' => $msg, // کونسول لاگنگ کے لیے
+        'error' => $msg,
         'content' => [
             [
                 'type' => 'text',
@@ -26,7 +28,27 @@ function send_error($msg) {
     exit;
 }
 
-// ✅ ENV فائل لوڈ کرنے کا انتہائی محفوظ اور مضبوط طریقہ
+// ✅ سمارٹ اور گلوبل فیٹل ایرر کیپچر (Shutdown Handler)
+// اگر سرور پر پی ایچ پی کا کوئی بھی پرانا ورژن ہونے کی وجہ سے کوڈ کریش ہوگا،
+// تو یہ فنکشن اسے خاموش کریش (HTTP 500) ہونے کے بجائے چیٹ وزٹ کے اندر شو کروا دے گا۔
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error !== NULL && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'error' => 'PHP Fatal Error: ' . $error['message'],
+            'content' => [
+                [
+                    'type' => 'text',
+                    'text' => "⚠️ سرور کریش رپورٹ (PHP Error): " . $error['message'] . " (فائل: " . basename($error['file']) . "، لائن: " . $error['line'] . ")"
+                ]
+            ]
+        ]);
+        exit;
+    }
+});
+
+// ✅ ENV فائل لوڈ کرنے کا انتہائی محفوظ اور ہر پی ایچ پی ورژن کے لیے مطابقت رکھنے والا طریقہ
 $ENV_VARS = [];
 function loadEnv($path) {
     global $ENV_VARS;
@@ -34,17 +56,23 @@ function loadEnv($path) {
         return false;
     }
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) return false;
+
     foreach ($lines as $line) {
         $line = trim($line);
-        if (empty($line) || str_starts_with($line, '#')) continue;
+        if (empty($line)) continue;
+        
+        // 🔴 پی ایچ پی 7 اور پرانے ورژنز کے ساتھ مطابقت کے لیے str_starts_with کی جگہ strpos استعمال کیا گیا ہے
+        if (strpos($line, '#') === 0) continue; 
+        
         if (strpos($line, '=') !== false) {
-            [$key, $val] = explode('=', $line, 2);
-            $key = trim($key);
-            $val = trim($val);
-            // اگر ویلیو کے گرد کوٹس (Quotes) ہوں تو انہیں ہٹائیں
+            $parts = explode('=', $line, 2);
+            $key = trim($parts[0]);
+            $val = trim($parts[1]);
+            
+            // اگر ویلیو کے گرد کوٹس ہوں تو انہیں صاف کریں
             $val = trim($val, "\"'");
             
-            // سسٹم کے تمام ممکنہ انوائرمنٹ گلوبلز میں سیٹ کریں
             putenv("$key=$val");
             $_ENV[$key] = $val;
             $_SERVER[$key] = $val;
@@ -60,8 +88,11 @@ if (!loadEnv($env_path)) {
     send_error("فائل {$env_path} پر نہیں ملی۔ براہ کرم پاتھ چیک کریں۔");
 }
 
-// API Key حاصل کرنے کے لیے 4 متبادل طریقے (تاکہ ہوسٹنگ سیکیورٹی بلاک نہ کرے)
-$api_key = getenv('GEMINI_API_KEY') ?: ($_ENV['GEMINI_API_KEY'] ?? ($_SERVER['GEMINI_API_KEY'] ?? ($ENV_VARS['GEMINI_API_KEY'] ?? '')));
+// API Key حاصل کرنے کے لیے 4 متبادل طریقے (بیک ورڈ مطابقت کے ساتھ)
+$api_key = getenv('GEMINI_API_KEY');
+if (!$api_key) $api_key = isset($_ENV['GEMINI_API_KEY']) ? $_ENV['GEMINI_API_KEY'] : '';
+if (!$api_key) $api_key = isset($_SERVER['GEMINI_API_KEY']) ? $_SERVER['GEMINI_API_KEY'] : '';
+if (!$api_key) $api_key = isset($ENV_VARS['GEMINI_API_KEY']) ? $ENV_VARS['GEMINI_API_KEY'] : '';
 
 if (empty($api_key)) {
     send_error("so.env فائل میں GEMINI_API_KEY موجود نہیں ہے یا خالی ہے۔");
@@ -100,8 +131,6 @@ curl_setopt_array($ch, [
     CURLOPT_POST => true,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 30,
-    // 🔴 انتہائی اہم: cPanel ہوسٹنگ پر اکثر پرانے SSL سرٹیفکیٹس کی وجہ سے API کال فیل ہو جاتی ہے
-    // اسے حل کرنے کے لیے عارضی طور پر SSL تصدیق کو بائی پاس کیا گیا ہے تاکہ کنکشن سو فیصد کامیاب ہو۔
     CURLOPT_SSL_VERIFYPEER => false,
     CURLOPT_SSL_VERIFYHOST => false,
     CURLOPT_HTTPHEADER => [
@@ -120,7 +149,7 @@ if ($err) {
     send_error("سرور کنکشن کی خرابی (cURL Error): " . $err);
 }
 
-// اگر جیمنائی API کوئی ایرر واپس کرے (جیسے انویلڈ کی یا کوٹہ ختم ہونا)
+// اگر جیمنائی API کوئی ایرر واپس کرے
 if ($http_code !== 200) {
     $api_err = json_decode($response, true);
     $error_msg = $api_err['error']['message'] ?? "HTTP Code $http_code (خام جواب: " . substr($response, 0, 150) . ")";
@@ -137,7 +166,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $bot_reply = $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
 if (empty($bot_reply)) {
-    send_error("جیمنائی کی طرف سے خالی جواب موصول ہوا۔ مکمل ڈیٹا: " . json_encode($result));
+    send_error("جیمنائی کی طرف سے خالی جواب موصول ہوا۔");
 }
 
 // ✅ فرنٹ اینڈ 'chat-widget.js' کے لیے کلاڈ ہم آہنگ فارمیٹ

@@ -50,7 +50,7 @@ Discounted Rates:
 
 7+ Nights stay: PKR 5,500 total discount
 
-30+ Nights stay: PKR 35,000 flat monthly packages available
+30+ Nights stay: PKR 35,000 discounted flat monthly packages available
 
 Amenities: Garden View, 40” Smart LED TV (with Netflix), Air Conditioner, Room Fridge, Attached premium bathroom with 24/7 Hot Water, High-Speed Wi-Fi, Electric kettle (with complimentary tea/coffee setup), and 24-hour Room Service.
 
@@ -72,7 +72,7 @@ Discounted Rates:
 
 7+ Nights stay: PKR 5,500 total discount
 
-30+ Nights stay: PKR 35,000 flat monthly packages available
+30+ Nights stay: PKR 35,000 discounted flat monthly packages available
 
 Amenities: Air Conditioner, Smart LED TV, Room Fridge, attached clean bathroom with 24/7 Hot Water, High-Speed Wi-Fi, and 24-hour Room Service.
 
@@ -94,9 +94,11 @@ Discounted Rates:
 
 7+ Nights stay: PKR 5,000 total discount
 
-30+ Nights stay: PKR 20,000 flat monthly packages available
+30+ Nights stay: PKR 20,000 discounted flat monthly packages available
 
 Amenities: Single occupancy comfort, dedicated AC, Smart LED TV, High-Speed Wi-Fi, Hot Water, and Room Service.
+
+
 
 ⚡ GENERAL INCLUDED SERVICES & AMENITIES
 
@@ -113,6 +115,8 @@ All guests staying at StayOra enjoy access to premium services without extra cha
 🧹 Daily Cleaning: Rooms cleaned daily. Laundry services are available (charges apply).
 
 🌳 Garden Sitting: Beautiful lush green lawn for relaxation and sitting.
+
+
 
 📜 GUEST HOUSE POLICIES (قوانین اور پالیسی)
 

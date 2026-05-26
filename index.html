@@ -378,13 +378,22 @@ Accommodation<!DOCTYPE html>
             }
         });
     </script>
-<!-- Claude Chat Widget -->
-<div id="claude-btn" onclick="toggleChat()">💬 Chat</div>
-<div id="claude-box" style="display:none">
-  <div id="claude-msgs"></div>
-  <input id="claude-input" placeholder="سوال لکھیں..."/>
-  <button onclick="sendMsg()">بھیجیں</button>
+<!-- StayOra Chat Widget -->
+<link rel="stylesheet" href="/stayora/chat-style.css">
+
+<button id="stayora-chat-btn" onclick="toggleChat()">💬 Chat with Us</button>
+
+<div id="stayora-chat-box">
+  <div class="stay-header">🏨 StayOra Assistant</div>
+  <div id="stay-msgs">
+    <div class="stay-msg bot">السلام علیکم! میں StayOra کا AI assistant ہوں۔ کمرہ بکنگ یا کوئی بھی سوال پوچھیں! 🏨</div>
+  </div>
+  <div class="stay-input-area">
+    <input id="stay-input" placeholder="سوال لکھیں..." type="text"/>
+    <button id="stay-send-btn" onclick="staySend()">بھیجیں</button>
+  </div>
 </div>
-<script src="chat-widget.js"></script>
+
+<script src="/stayora/chat-widget.js"></script>
 </body>
 </html>

@@ -1,38 +1,20 @@
 <?php
-// ENV لوڈ کریں
-function loadEnv($path) {
-  if (!file_exists($path)) return false;
-  $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  foreach ($lines as $line) {
-    if (strpos(trim($line),'#')===0) continue;
-    if (strpos($line,'=')!==false) {
-      [$k,$v]=explode('=',$line,2);
-      putenv(trim($k).'='.trim($v));
-    }
-  }
-  return true;
-}
+// اصل server path معلوم کریں
+echo "<b>PHP چل رہی یہاں سے:</b> " . __FILE__ . "<br>";
+echo "<b>Home Directory:</b> " . getenv('HOME') . "<br>";
+echo "<b>Document Root:</b> " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
 
-$envPath = '/home/noorgeec/cred/so.env';
-$envLoaded = loadEnv($envPath);
-$api_key = getenv('ANTHROPIC_API_KEY');
+// مختلف paths چیک کریں
+$paths = [
+  '/home/noorgeec/cred/so.env',
+  '/home/noorgeec/cred/so.env',
+  '/var/www/noorgeec/cred/so.env',
+  dirname(dirname($_SERVER['DOCUMENT_ROOT'])) . '/cred/so.env',
+  dirname($_SERVER['DOCUMENT_ROOT']) . '/cred/so.env',
+];
 
-echo "<h3>Debug Results</h3>";
-echo "ENV File Found: " . ($envLoaded ? "✅ YES" : "❌ NO - Path wrong!") . "<br>";
-echo "API Key Loaded: " . ($api_key ? "✅ YES (starts with: ".substr($api_key,0,10)."...)" : "❌ NO - Key missing!") . "<br>";
-echo "cURL Available: " . (function_exists('curl_init') ? "✅ YES" : "❌ NO") . "<br>";
-
-// Test API Call
-if ($api_key) {
-  $ch = curl_init('https://api.anthropic.com/v1/messages');
-  curl_setopt_array($ch,[
-    CURLOPT_POST=>true, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>15,
-    CURLOPT_HTTPHEADER=>["x-api-key: {$api_key}","anthropic-version: 2023-06-01","Content-Type: application/json"],
-    CURLOPT_POSTFIELDS=>json_encode(['model'=>'claude-sonnet-4-20250514','max_tokens'=>50,'messages'=>[['role'=>'user','content'=>'Say OK']]])
-  ]);
-  $res=curl_exec($ch);
-  $err=curl_error($ch);
-  curl_close($ch);
-  echo "API Test: " . ($err ? "❌ CURL Error: $err" : "Response: $res") . "<br>";
+echo "<br><b>Path Check:</b><br>";
+foreach($paths as $p) {
+  echo (file_exists($p) ? "✅ FOUND" : "❌ NOT FOUND") . " → $p <br>";
 }
 ?>

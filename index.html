@@ -41,32 +41,241 @@ Accommodation<!DOCTYPE html>
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #064e3b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #d97706; }
-    
-    .gallery-btn-wrap {
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
 
-.gallery-btn {
-    display: inline-block;
-    padding: 10px 22px;
-    background: #111827;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 999px;
-    letter-spacing: 0.3px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-}
+        /* Gallery Styles */
+        .gallery-section {
+            padding: 80px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-.gallery-btn:hover {
-    background: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
-}
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-header h2 {
+            font-size: clamp(34px, 5vw, 48px);
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .gallery-header p {
+            font-size: 16px;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: min(72vh, 680px);
+            min-height: 420px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #111;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.16);
+            margin-bottom: 26px;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.8s ease, transform 1.2s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(0,0,0,0.62) 0%,
+                rgba(0,0,0,0.25) 48%,
+                rgba(0,0,0,0.12) 100%
+            );
+        }
+
+        .slide-caption {
+            position: absolute;
+            left: clamp(24px, 5vw, 70px);
+            bottom: clamp(35px, 7vw, 80px);
+            z-index: 4;
+            max-width: 560px;
+            color: #fff;
+            text-align: left;
+        }
+
+        .slide-caption .eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.28);
+            padding: 7px 12px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .slide-caption h2 {
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1.05;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: -1px;
+            color: #fff !important;
+        }
+
+        .slide-caption p {
+            font-size: clamp(15px, 2vw, 18px);
+            color: rgba(255,255,255,0.88);
+            max-width: 460px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            z-index: 6;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.88);
+            color: #111;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .slider-nav:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.06);
+        }
+
+        .slider-prev { left: 20px; }
+        .slider-next { right: 20px; }
+
+        .slider-controls {
+            position: absolute;
+            right: 24px;
+            bottom: 22px;
+            z-index: 8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0,0,0,0.34);
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(12px);
+            padding: 10px 14px;
+            border-radius: 999px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.42);
+            cursor: pointer;
+            transition: width 0.25s ease, background 0.25s ease;
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 99px;
+            background: #fff;
+        }
+
+        .play-toggle {
+            border: none;
+            background: #fff;
+            color: #111;
+            padding: 8px 13px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .thumb-strip {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .thumb {
+            height: 90px;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.62;
+            background: #ddd;
+            transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .thumb.active,
+        .thumb:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-slider { height: 58vh; }
+            .thumb-strip { grid-template-columns: repeat(6, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .gallery-section { padding: 48px 14px; }
+            .hero-slider { height: 68vh; min-height: 500px; border-radius: 18px; }
+            .slide::after {
+                background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 48%, rgba(0,0,0,0.78) 100%);
+            }
+            .slide-caption { left: 20px; right: 20px; bottom: 88px; }
+            .slider-nav { width: 42px; height: 42px; font-size: 24px; }
+            .slider-prev { left: 12px; }
+            .slider-next { right: 12px; }
+            .slider-controls { left: 16px; right: 16px; bottom: 18px; justify-content: space-between; }
+            .thumb-strip { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .thumb { height: 78px; }
+        }
     </style>
 </head>
 <body class="text-slate-800 antialiased">
@@ -84,6 +293,7 @@ Accommodation<!DOCTYPE html>
                 <ul class="hidden md:flex space-x-8 items-center">
                     <li><a href="#home" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Home</a></li>
                     <li><a href="#amenities" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Amenities</a></li>
+                    <li><a href="#gallery" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Gallery</a></li>
                     <li><a href="#rooms" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Rooms</a></li>
                     <li><a href="#policies" class="text-sm font-medium text-slate-600 hover:text-amber-600 transition duration-300 uppercase tracking-wider">Policies</a></li>
                     <li>
@@ -103,6 +313,7 @@ Accommodation<!DOCTYPE html>
             <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 pb-4 absolute w-full left-0 shadow-lg">
                 <a href="#home" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Home</a>
                 <a href="#amenities" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Amenities</a>
+                <a href="#gallery" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Gallery</a>
                 <a href="#rooms" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Rooms</a>
                 <a href="#policies" class="block py-3 px-4 text-slate-600 hover:bg-stone-50 hover:text-amber-600 transition">Policies</a>
                 <a href="https://wa.me/923282255771" class="block py-3 px-4 font-bold text-emerald-900 hover:bg-stone-50 transition">Contact via WhatsApp</a>
@@ -185,10 +396,32 @@ Accommodation<!DOCTYPE html>
                     <p class="text-slate-500 text-sm leading-relaxed">Dedicated staff ready to cater to your needs at any hour of the day.</p>
                 </div>
             </div>
-            <div class="gallery-btn-wrap">
-    <a href="gallery.html" class="gallery-btn">View Gallery</a>
-</div>
+
             
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-emerald-700 font-medium tracking-widest uppercase text-xs">Visual Tour</span>
+                <h2 class="text-4xl font-serif font-bold text-slate-900 mt-2 mb-4">Our Gallery</h2>
+                <div class="h-1 w-24 bg-amber-500 mx-auto mb-8"></div>
+                <p class="text-slate-600 max-w-2xl mx-auto">Discover beautifully designed rooms made for comfort, calm and convenience.</p>
+            </div>
+
+            <div class="hero-slider" id="heroSlider">
+                <button class="slider-nav slider-prev" id="sliderPrev" aria-label="Previous slide">‹</button>
+                <button class="slider-nav slider-next" id="sliderNext" aria-label="Next slide">›</button>
+
+                <div class="slider-controls">
+                    <div class="dots" id="sliderDots"></div>
+                    <button class="play-toggle" id="playToggle">Pause</button>
+                </div>
+            </div>
+
+            <div class="thumb-strip" id="thumbStrip"></div>
         </div>
     </section>
 
@@ -377,6 +610,133 @@ Accommodation<!DOCTYPE html>
                 navbar.classList.remove('py-0');
             }
         });
+
+        // Gallery Slider Logic
+        const IMAGE_BASE_PATH = './img/so-room-';
+        const IMAGE_FORMAT = '.jpeg';
+        const NEW_ROOM_BASE_PATH = './img/StayOra-Room_G';
+        const NEW_ROOM_FORMAT = '.jpg';
+
+        const imageNumbers = [1, 3, 5, 7, 8, 9];
+        const newRoomNumbers = [1, 2, 3, 4, 5, 6];
+        
+        const allImages = [
+            ...imageNumbers.map(num => ({ path: `${IMAGE_BASE_PATH}${String(num).padStart(2, '0')}${IMAGE_FORMAT}`, type: 'original' })),
+            ...newRoomNumbers.map(num => ({ path: `${NEW_ROOM_BASE_PATH}${num}${NEW_ROOM_FORMAT}`, type: 'new' }))
+        ];
+        const ROOM_COUNT = allImages.length;
+
+        const roomCaptions = [
+            { title: 'Comfortable Guest Rooms', text: 'A clean, calm and welcoming place designed for restful stays.' },
+            { title: 'Relaxed Stay Experience', text: 'A practical guesthouse setup for families, travelers and business guests.' },
+            { title: 'Simple Luxury', text: 'Elegant spaces without unnecessary clutter. Good hospitality is still king.' },
+            { title: 'Warm Guesthouse Feel', text: 'A homely setting with the polish of a professional stay.' },
+            { title: 'Clean and Cozy Rooms', text: 'Fresh, organized and ready for a comfortable night.' },
+            { title: 'Your StayOra Experience', text: 'A better stay begins with a room that feels right.' },
+            { title: 'Room G-1', text: 'Spacious and elegantly designed for ultimate comfort.' },
+            { title: 'Room G-2', text: 'Modern amenities with a touch of warmth and hospitality.' },
+            { title: 'Room G-3', text: 'Perfect for families seeking a homey atmosphere.' },
+            { title: 'Room G-4', text: 'Serene and peaceful, ideal for a restful getaway.' },
+            { title: 'Room G-5', text: 'Thoughtfully appointed with all the comforts of home.' },
+            { title: 'Room G-6', text: 'Experience luxury and convenience in perfect harmony.' }
+        ];
+
+        let currentSlideIndex = 0;
+        let autoPlay = true;
+        let sliderTimer = null;
+
+        const heroSlider = document.getElementById('heroSlider');
+        const sliderDots = document.getElementById('sliderDots');
+        const thumbStrip = document.getElementById('thumbStrip');
+        const playToggle = document.getElementById('playToggle');
+
+        function imagePath(index) {
+            return allImages[index].path;
+        }
+
+        function initSlider() {
+            if (!heroSlider) return;
+            for (let i = 0; i < ROOM_COUNT; i++) {
+                const slide = document.createElement('div');
+                slide.className = `slide ${i === 0 ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <img src="${imagePath(i)}" alt="StayOra Room ${i + 1}">
+                    <div class="slide-caption">
+                        <span class="eyebrow">StayOra Guesthouse</span>
+                        <h2>${roomCaptions[i].title}</h2>
+                        <p>${roomCaptions[i].text}</p>
+                    </div>
+                `;
+                heroSlider.appendChild(slide);
+
+                const dot = document.createElement('button');
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                sliderDots.appendChild(dot);
+
+                const thumb = document.createElement('button');
+                thumb.className = `thumb ${i === 0 ? 'active' : ''}`;
+                thumb.setAttribute('aria-label', `Open slide ${i + 1}`);
+                thumb.innerHTML = `<img src="${imagePath(i)}" alt="StayOra room thumbnail ${i + 1}">`;
+                thumb.addEventListener('click', () => goToSlide(i));
+                thumbStrip.appendChild(thumb);
+            }
+            startAutoPlay();
+        }
+
+        function updateSlider() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const thumbs = document.querySelectorAll('.thumb');
+            slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlideIndex));
+            dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlideIndex));
+            thumbs.forEach((thumb, index) => thumb.classList.toggle('active', index === currentSlideIndex));
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlider();
+            restartAutoPlay();
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % ROOM_COUNT;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + ROOM_COUNT) % ROOM_COUNT;
+            updateSlider();
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            if (autoPlay) sliderTimer = setInterval(nextSlide, 4000);
+        }
+
+        function stopAutoPlay() {
+            if (sliderTimer) { clearInterval(sliderTimer); sliderTimer = null; }
+        }
+
+        function restartAutoPlay() {
+            if (autoPlay) startAutoPlay();
+        }
+
+        document.getElementById('sliderNext').addEventListener('click', () => { nextSlide(); restartAutoPlay(); });
+        document.getElementById('sliderPrev').addEventListener('click', () => { prevSlide(); restartAutoPlay(); });
+        playToggle.addEventListener('click', () => {
+            autoPlay = !autoPlay;
+            playToggle.textContent = autoPlay ? 'Pause' : 'Play';
+            autoPlay ? startAutoPlay() : stopAutoPlay();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { nextSlide(); restartAutoPlay(); }
+            if (e.key === 'ArrowLeft') { prevSlide(); restartAutoPlay(); }
+        });
+
+        document.addEventListener('DOMContentLoaded', initSlider);
     </script>
 <!-- StayOra Chat Widget -->
 <link rel="stylesheet" href="/stayora/chat-style.css">

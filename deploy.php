@@ -1,3 +1,35 @@
+<?php
+// --- Backend Deploy Handler ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    header('Content-Type: application/json');
+
+    $allowed_branches = ['main-so', 'main-copilot', 'main-claude'];
+    $branch = isset($_POST['branch']) ? trim($_POST['branch']) : '';
+    $action = $_POST['action'];
+
+    if (!in_array($branch, $allowed_branches)) {
+        echo json_encode(['success' => false, 'output' => 'Invalid branch.']);
+        exit;
+    }
+
+    $repo_path = escapeshellarg(__DIR__);
+
+    if ($action === 'pull') {
+        $cmd = "cd {$repo_path} && git fetch origin && git checkout " . escapeshellarg($branch) . " && git pull origin " . escapeshellarg($branch) . " 2>&1";
+    } elseif ($action === 'force') {
+        $cmd = "cd {$repo_path} && git fetch origin && git checkout " . escapeshellarg($branch) . " && git reset --hard origin/" . escapeshellarg($branch) . " 2>&1";
+    } else {
+        echo json_encode(['success' => false, 'output' => 'Invalid action.']);
+        exit;
+    }
+
+    $output = shell_exec($cmd);
+    $success = $output !== null;
+
+    echo json_encode(['success' => $success, 'output' => $output ?: 'No output returned.']);
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,19 +273,40 @@
 
         branchSelect.addEventListener('change', () => fetchGitHubCommits(true));
 
-        function performDeploy(isForce = false) {
+        async function performDeploy(isForce = false) {
             const btn = isForce ? forceDeployBtn : executeDeployBtn;
             const icon = isForce ? document.getElementById('forceIcon') : document.getElementById('deployIcon');
-            
+
             btn.disabled = true;
             icon.classList.add('animate-spin');
             deployStatusResult.innerHTML = `<span class="${isForce ? 'text-red-400' : 'text-amber-400'}">> Executing ${isForce ? 'FORCE RESET' : 'PULL'}...</span>`;
-            
-            setTimeout(() => {
-                deployStatusResult.innerHTML = `<span class="text-green-400">> ✅ Deployment Successful!<br>> Branch: ${branchSelect.value}<br>> Mode: ${isForce ? 'Force' : 'Standard'}</span>`;
+
+            try {
+                const body = new URLSearchParams({
+                    action: isForce ? 'force' : 'pull',
+                    branch: branchSelect.value
+                });
+
+                const res = await fetch(window.location.href, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body.toString()
+                });
+
+                const data = await res.json();
+                const outputHtml = (data.output || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+
+                if (data.success) {
+                    deployStatusResult.innerHTML = `<span class="text-emerald-400">> ✅ Deployment Successful!<br>> Branch: ${branchSelect.value}<br>> Mode: ${isForce ? 'Force' : 'Standard'}<br><br>${outputHtml}</span>`;
+                } else {
+                    deployStatusResult.innerHTML = `<span class="text-red-400">> ❌ Deployment Failed.<br>${outputHtml}</span>`;
+                }
+            } catch (err) {
+                deployStatusResult.innerHTML = `<span class="text-red-400">> ❌ Request error: ${err.message}</span>`;
+            } finally {
                 icon.classList.remove('animate-spin');
                 btn.disabled = false;
-            }, 2500);
+            }
         }
 
         executeDeployBtn.addEventListener('click', () => performDeploy(false));

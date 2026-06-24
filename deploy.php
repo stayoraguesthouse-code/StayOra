@@ -62,6 +62,7 @@
                     <select id="branchSelect" class="block w-full pl-3 pr-10 py-3 text-base border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-lg border bg-white transition-all">
                         <option value="main-so" selected>main-so</option>
                         <option value="main-copilot">main-copilot</option>
+                        <option value="main-claude">main-claude</option>
                     </select>
                 </div>
                 <div>
